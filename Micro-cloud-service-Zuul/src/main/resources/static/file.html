@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>bootstrap.file-input</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="javascript/plugins/jquery-ui.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascript/file/bootstrap.file-input.js"></script>
+</head>
+<body>
+<!-- Change the wording using a title tag -->
+<input type="file" title="Search for a file to add 1" class="btn-primary">
+<br>
+<br>
+<input type="file" title="Search for a file to add 2" class="btn btn-primary">
+<br>
+<br>
+<input type="file" title="Search for a file to add 3" class="btn-primary">
+<br>
+<br>
+<input type="file" title="Search for a file to add 4" class="btn-primary">
+<br>
+<br>
+<br>
+<br>
+<br>
+Disable the styling:
+<!-- Disable the styling -->
+<input type="file" data-bfi-disabled>
+<script type="text/javascript">
+    $('input[type=file]').bootstrapFileInput();
+</script>
+</body>
+</html>

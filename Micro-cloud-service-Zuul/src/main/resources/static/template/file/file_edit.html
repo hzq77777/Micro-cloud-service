@@ -1,0 +1,37 @@
+<div class="page page-form">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="glyphicon glyphicon-th" translate="CERTIFICATE_MANAGE"></span></strong>
+        </div>
+        <div class="panel-body">
+            <form name="form" class="form-horizontal form-validation" enctype="multipart/form-data"  data-ng-submit="submitPolicyForm()">
+                <div class="form-group">
+
+                    <div class="col-lg-1 col-md-2 col-sm-2">
+                        <label><span class="text-danger ">*</span><span translate="CERTIFICATE.UPLOAD"></span></label>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-5">
+                        <input id="fileUpload" type="file" style="display:none">
+                        <div class="input-append">
+                            <input id="photoCover" class="input-large" type="text">
+                            <a class="btn btn-info" onclick="$('input[id=fileUpload]').click();"><span translate="CERTIFICATE.CHOOSE"></span></a>
+                        </div>
+
+                        <script type="text/javascript">
+                            $('input[id=fileUpload]').change(function() {
+                                $('#photoCover').val($(this).val());
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div  class="col-lg-6 col-md-6 col-sm-6">
+                        <button type="submit" class="btn btn-primary" translate="CERTIFICATE.UPLOAD"></button>
+                        <button type="button" class="btn btn-inverse" ng-click="goBack()" translate="OTHER.BACK"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

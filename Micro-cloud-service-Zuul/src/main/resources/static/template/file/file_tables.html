@@ -1,0 +1,81 @@
+<div class="page page-table">
+    <div class="panel panel-default">
+        <div class="panel-heading" ><strong><span class="glyphicon glyphicon-th"  translate="CERTIFICATE_MANAGE"></span></strong></div>
+
+        <div class="row  m-b m-l m-t">
+            <div class="col-lg-8">
+                <input type="text" name="keyid" id="keyid" maxlength="128" ng-model="bbbb"
+                       placeholder="Search for your message..." class="search" style="width: 350px"/>
+                <div class="btn-group dropdown open" uib-dropdown>
+                    <button class="btn btn-default" style=" border:2px solid #ccc; outline: none;" translate="CERTIFICATE.QUERY_SELEC"> </button>
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"  style=" border:2px solid #ccc; outline: none;"><span class="caret"></span></button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+                        <li><a href="javascript:void(0);" ng-click="searchByUserid()">用户ID</a></li>
+                        <li><a href="javascript:void(0);" ng-click="searchByDeviceMac()">终端的MAC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div  class="col-lg-2 col-lg-offset-2">
+                <button type="button"  class="btn btn-success button-right" ng-click="add()" translate="CERUPLOAD">证书上传</button>
+
+            </div>
+        </div>
+
+
+        <!--</div>-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th translate="CERTIFICATE.USERNAME">USERNAME</th>
+                        <th translate="CERTIFICATE.DEVICE">DEVICE</th>
+                        <th translate="CERTIFICATE.PIN">PIN</th>
+                        <th translate="CERTIFICATE.DATE">DATE</th>
+                        <th translate="CERTIFICATE.RSTS">RSTS</th>
+                        <th translate="CERTIFICATE.ASTS">ASTS</th>
+                        <th translate="CERTIFICATE.POLICY_ACTION">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="obj in fileTable">
+                        <td><p class="text-info">{{obj.username}}</p></a></td>
+                        <td><p class="text-info">{{obj.devicename}}</p></a></td>
+                        <td><p class="text-info">{{obj.pinname}}</p></a></td>
+                        <td><p class="text-info">{{obj.createdate}}</p></a></td>
+                        <td>
+                            <div ng-if='obj.rsts!="A"'><span class="label  label-success">未关联</span></div>
+                            <div ng-if="obj.rsts=='A'"><span class="label  label-primary">已关联</span></div>
+                        </td>
+                        <td>
+                            <div ng-if='obj.asts!="A"'><span class="label  label-success">未接入</span></div>
+                            <div ng-if="obj.asts=='A'"><span class="label label-primary">已接入</span></div>
+                        </td>
+
+                        <td>
+                            <div ng-if='obj.asts!="A" && obj.rsts!="A"'>
+                                <a href title='Ralate' class = "btn" ng-click="selectmac(obj.username)"><span class="label label-success">设置关联</span></a>
+                                <a href title='Access' class = "btn"  ng-click="access(obj.username)"><div><span class="label label-success">设置接入</span></div></a>
+                            </div>
+                            <div ng-if='obj.rsts!="A" && obj.asts=="A"'>
+                                <a href title='Ralate' class = "btn"  ng-click="selectmac(obj.username)"><div><span class="label label-success">设置关联</span></div></a>
+                                <a href title='Access' class = "btn" ng-click="uaccess(obj.username)"><span class="label label-primary">取消接入</span></a>
+                            </div>
+                            <div ng-if=' obj.asts=="A" && obj.rsts=="A" '>
+                                <a href title='Ralate' class = "btn"  ng-click="uralate(obj.username)"><div><span class="label label-primary">取消关联</span></div></a>
+                                <a href title='Access' class = "btn"  ng-click="uaccess(obj.username)"><span class="label label-primary">取消接入</span></a>
+                            </div>
+                            <div ng-if='obj.rsts=="A" && obj.asts!="A"'>
+                                <a href title='Ralate' class = "btn" ng-click="uralate(obj.username)"><span class="label label-primary">取消关联</span></a>
+                                <a href title='Access' class = "btn"  ng-click="access(obj.username)"><div><span class="label label-success">设置接入</span></div></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <footer class="panel-footer">
+            <div class="row">
+                <div id="page" class="pull-right"></div>
+            </div>
+        </footer>
+    </div>
+</div>

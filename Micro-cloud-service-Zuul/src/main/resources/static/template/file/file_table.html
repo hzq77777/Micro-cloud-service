@@ -1,0 +1,70 @@
+<div class="page page-table">
+    <div class="panel panel-default">
+        <div class="panel-heading" ><strong><span class="glyphicon glyphicon-th"  translate="CERTIFICATE_MANAGE"></span></strong></div>
+        <!--<div class="row  m-b m-l m-t">-->
+            <!--<div class="col-lg-6">-->
+                <!--<div class="input-group search">-->
+                    <!--<input type="text" name="name" id="name" maxlength="128" ng-model="formData.name" placeholder="Search for your HDFS Policy..." class="form-control"/>-->
+                    <!--<div  class="input-group-btn search-button">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="searchGroupByName()"><i class="glyphicon glyphicon-search"></i></button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-lg-3 col-lg-offset-hdfs-11">-->
+                <!--<button type="button" data-id="addNewGroup" class="btn btn-success button-right" ng-click="add()" translate="PERMISSION_POLICY.HDFS.ADD_NEW_HDFS_POLICY"></i>ADD_NEW_HDFS_POLICY</button>-->
+            <!--</div>-->
+            <!--<div  class="col-lg-2">-->
+                <!--<button type="button" data-id="addNewGroup" class="btn btn-success button-right" ng-click="add()" translate="PERMISSION_POLICY.ADD"></button>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="row  m-b m-l m-t">
+
+            <div class="col-lg-8">
+                <!--<input type="text" name="keyword" maxlength="128" ng-model="keyword"-->
+                       <!--placeholder="Search for your policy..." class="search" id="tags" ng-keyup="searchPolicy($event)"/>-->
+            <!--</div>-->
+            </div>
+            <div  class="col-lg-1">
+                <button type="button"  class="btn btn-success button-right" ng-click="add()" translate="CERUPLOAD">aaaa</button>
+            </div>
+
+        </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th translate="CERTIFICATE.USERNAME">Name</th>
+                        <th translate="CERTIFICATE.DEVICE">Status</th>
+                        <th translate="CERTIFICATE.DATE">Audit Logging</th>
+                        <th translate="CERTIFICATE.ISSTS">Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="obj in hdfsTable">
+                        <input type="hidden" name="id" value="{{obj.id}}" />
+                        <td><a href ng-click="edit(obj.username)"><p class="text-info">{{obj.username}}</p></a></td>
+                        <td><a href ng-click="edit(obj.deviceid)"><p class="text-info">{{obj.deviceid}}</p></a></td>
+                        <td class="rowTd" sortable="'createdate'">{{obj.createdate}}</td>
+                        <td>
+                            <div ng-if='obj.sts=="P"'><span class="label  label-success">未保存</span></div>
+                            <div ng-if="obj.sts=='A'"><span class="label label-primary">保存</span></div>
+                        </td>
+
+                        <!--<td class="left">-->
+                            <!--&lt;!&ndash;<a href title='edit' class = "btn" ng-click="edit(obj.id)"><i class='glyphicon glyphicon-edit m-r-5'></i></a>&ndash;&gt;-->
+                            <!--<a href title='delete' class = "btn btn-danger"  ng-click="del(obj.id)"><i class="glyphicon glyphicon-trash m-r-5"></i></a>-->
+                        <!--</td>-->
+                    </tr>
+                </tbody>
+            </table>
+        <div class="text-center">
+            <p ng-show="tableloading">Loading</p>
+            <p ng-show="!tableLength > 0 && !tableloading">No data</p>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div id="page" class="pull-right"></div>
+            </div>
+        </footer>
+    </div>
+</div>

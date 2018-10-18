@@ -1,0 +1,22 @@
+eureka:
+  instance:
+    hostname: localhost
+    securePort: ${server.port}
+    securePortEnabled: true
+    nonSecurePortEnabled: false
+    secureVirtualHostName: ${spring.application.name}
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}/
+    statusPageUrl: https://${eureka.instance.hostname}:${server.port}/info
+    metadataMap:
+      hostname : ${eureka.instance.hostname}
+      securePort: ${server.port}
+  client:
+    registerwitheureka: false
+    fetchregistry: false
+    service-url:
+      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+

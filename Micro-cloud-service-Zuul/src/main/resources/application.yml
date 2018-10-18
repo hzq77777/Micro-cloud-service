@@ -1,0 +1,103 @@
+server.port: 9090
+server.ssl.key-store: keystore.p12
+server.ssl.key-store-password: 123456
+server.ssl.keyStoreType: PKCS12
+server.ssl.keyAlias: tomcat
+spring:
+  application:
+    name: Gateway
+  jpa:
+      show-sql: true
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/certdb?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: hzq123
+      druid:
+         driver-class-name: com.mysql.jdbc.Driver
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5Dialect
+spring.jpa.hibernate.ddl-auto: update
+eureka:
+   client:
+      serviceUrl:
+          defaultZone: https://localhost:9010/eureka/
+      healthcheck:
+           enabled: true
+   instance:
+       hostname: localhost
+       preferIpAddress: false
+       securePortEnabled: true
+       instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+       statusPageUrl: https://${eureka.instance.hostname}:${server.port}/info
+       healthCheckUrl: https://${eureka.instance.hostname}:${server.port}/health
+       homePageUrl: https://${eureka.instance.hostname}:${server.port}/
+endpoints:
+  health:
+    sensitive: false
+    enabled: true
+management:
+  security:
+    enabled: false
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  routes:
+    uaa:
+      path: /uaa/**
+      strip-prefix: true
+      sensitiveHeaders:
+      serviceId: auth2.0-center
+    ordera:
+       path: /ordera/**
+       trip-prefix: true
+       sensitiveHeaders:
+       serviceId: Service-ServiceA
+    orderb:
+       path: /orderb/**
+       trip-prefix: true
+       sensitiveHeaders:
+       serviceId: Service-ServiceB
+    file:
+       path: /file/**
+       trip-prefix: true
+       sensitiveHeaders:
+       serviceId: Service-File
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      access-token-uri: http://127.0.0.1:9030/uaa/oauth/token ##网关的地址
+      user-authorization-uri: http://127.0.0.1:9030/uaa/oauth/authorize
+    resource:
+      user-info-uri:  http://127.0.0.1:9030/uaa/user
+      prefer-token-info: false
+##############end#####################
+####超时配置####
+ribbon:
+  IsSecure: true
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+###超时配置###
+oauth: #oauth2-server认证授权服务器的url配置，在获取AccessToken以及检测AccessToken中会用到
+  token: http://127.0.0.1:9030/uaa/oauth/token
+  check_token: http://127.0.0.1:9030/uaa/oauth/check_token #检查AccessToken有效性的url(认证授权服务器的url地址),获取 AccessToken 对象
+
+logging.file: /opt/micro/log/zuul.log
+logging.level.root: info
+
+fzk.port: 8766
+file.Upload.path: /opt/micro

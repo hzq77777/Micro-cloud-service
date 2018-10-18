@@ -1,0 +1,37 @@
+<div class="page page-form">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="glyphicon glyphicon-th" translate="CERTIFICATE.SHOW"></span></strong>
+        </div>
+        <div class="panel-body">
+            <form name="form" class="form-horizontal form-validation" data-ng-submit="submitServiceForm()">
+
+                <div class="form-group">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label><span class="text-danger "></span><span translate="CERTIFICATE.USERNAME"></span></label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    {{formData.users.username}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label><span class="text-danger "></span><span translate="CERTIFICATE.DEVICE"></span></label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                       {{formData.device.deviceid}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div  class="col-lg-6 col-md-6 col-sm-6">
+                        <input type="hidden" name="id" value="{{id}}" />
+                        <button type="submit" class="btn btn-primary" translate="OTHER.SAVE"></button>
+                        <button type="button" class="btn btn-inverse" ng-click="goBack()"  translate="OTHER.BACK"></button>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="alert alert-info" data-ng-show="showInfoOnSubmit">This is just for demo. In real project, you will submit form with AJAX :)</div>
+            </form>
+        </div>
+    </div>
+</div>
